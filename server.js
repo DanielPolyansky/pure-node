@@ -17,7 +17,7 @@ const server = http.createServer((req, res) => {
     const contentType = mimes[path.extname(filepath)];
     fs.exists(filepath, (file_exists) => {
         if (file_exists) {
-            fs.readFile(filepath, (err, content) => {
+            /*fs.readFile(filepath, (err, content) => {
                 if (err) {
                     res.writeHead(500);
                     res.end();
@@ -25,6 +25,12 @@ const server = http.createServer((req, res) => {
                     res.writeHead(200, { 'Content-Type': contentType });
                     res.end(content, 'utf-8');
                 }
+            });*/
+            res.writeHead(200, { 'Content-Type': contentType });
+            const streamFile = fs.createReadStream(filepath).pipe(res);
+            streamFile.on('err', () => {
+                writeHead(500);
+                res.end();
             })
         } else {
             res.writeHead(404);
