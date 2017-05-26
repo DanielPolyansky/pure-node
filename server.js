@@ -1,6 +1,7 @@
 const http = require('http');
 const host = '127.1.0.0';
 const port = '3000';
+const qrImage = require('qr-image');
 const fs = require('fs'); //file system , not file stream
 const path = require('path');
 const mimes = {
@@ -12,6 +13,8 @@ const mimes = {
     ".png": "image/png"
 }
 
+qrImage
+    .image('http://www.nodejs.org', { type: 'png', size: 20 }).pipe(fs.createWriteStream('MyQR.png'));
 const server = http.createServer((req, res) => {
     const filepath = (req.url === '/') ? ('./index.html') : ('.' + req.url);
     const contentType = mimes[path.extname(filepath)];
