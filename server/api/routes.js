@@ -62,21 +62,21 @@ router.post('/api/login', (req, res, next) => {
 
 
 router.post('/api/authenticate', (req, res, next) => {
+    /*
+    req.checkBody('email', 'Invalid email!').notEmpty().isEmail();
+    req.checkBody('password', 'Invalid password!').notEmpty().isLength({ min: 5 });
+    req.checkBody('confirm_password', 'Passwords do not match!').equals(req.body.password);
 
-    /*req.checkBody('email', 'Invalid email!').notEmpty().isEmail();
-        req.checkBody('password', 'Invalid password!').notEmpty().isLength({ min: 5 });
-        req.checkBody('confirm_password', 'Passwords do not match!').equals(req.body.password);
-
-        const errors = req.validationErrors();
-        if (errors) {
-            var messages = [];
-            errors.forEach((err) => {
-                messages.push(err.msg);
-            });
-            console.log(messages);
-            return messages;
-        }*/
-
+    const errors = req.validationErrors();
+    if (errors) {
+        var messages = [];
+        errors.forEach((err) => {
+            messages.push(err.msg);
+        });
+        console.log(messages);
+        return messages;
+    }*/
+    console.log(req.body);
     const newUser = new User({
         email: req.body.email,
         username: req.body.username,

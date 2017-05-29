@@ -10,6 +10,7 @@ const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
 const morgan = require('morgan');
 const validator = require('express-validator');
+mongoose.Promise = global.Promise;
 
 mongoose.connect(database, (err) => {
     if (err) {
@@ -22,6 +23,7 @@ mongoose.connect(database, (err) => {
 app.set('superSecret', secret);
 
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(validator());
 app.use(express.static(path.join(__dirname, '../public')));
 app.use(morgan('dev'));
