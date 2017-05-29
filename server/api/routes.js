@@ -2,17 +2,20 @@ const express = require('express');
 const router = express.Router();
 const path = require('path');
 const User = require('../models/userSchema');
-const app = require('../server');
-
+const secret = require('../../config').secret;
+const jwt = require('jsonwebtoken');
 router.get('/', (req, res, next) => {
     res.sendFile(path.join(__dirname, '../../index.html'));
 });
+
 router.get('/home', (req, res, next) => {
     res.redirect('/');
 });
+
 router.get('/auth', (req, res, next) => {
     res.sendFile(path.join(__dirname, '../../client/auth.html'));
 });
+
 router.get('/login', (req, res, next) => {
     res.sendFile(path.join(__dirname, '../../client/login.html'));
 });
@@ -36,32 +39,27 @@ router.post('/api/login', (req, res, next) => {
     } else {
         User.findOne({
             username: req.body.username,
-        }), (err, user) => {
+        }, (err, user) => {
             if (err) {
                 console.log(err.msg);
                 res.json(err.msg);
-            }
-            if (!user) {
+            } else if (!user) {
                 res.json({ success: false, message: 'user not found' });
             } else if (user) {
                 if (user.password != req.body.password) {
                     res.json({ success: false, message: 'password missmatch' });
                 } else {
-                    const token = jwt.sign(user, app.use('superSecret'), {
-                        expiresInMunutes: 720
-                    });
+                    const token = jwt.sign(user, secret, { expiresIn: '10h' });
                     console.log('Token was created');
+                    res.json({
+                        success: true,
+                        message: 'Token was given',
+                        token: token
+                    });
                 }
-
-                res.json({
-                    success: true,
-                    message: 'Token was given',
-                    token: token
-                });
             }
-        }
-    }
-
+        });
+    };
 });
 
 

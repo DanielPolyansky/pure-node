@@ -1,36 +1,35 @@
 {
-  "name": "pure-node",
-  "version": "1.0.0",
-  "description": "studying node.js",
-  "main": "server.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon ./server/server.js --watch ./server"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/DanielPolyansky/pure-node.git"
-  },
-  "keywords": [
-    "node"
-  ],
-  "author": "Daniel Polyasnkiy",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/DanielPolyansky/pure-node/issues"
-  },
-  "homepage": "https://github.com/DanielPolyansky/pure-node#readme",
-  "dependencies": {
-    "body-parser": "^1.17.2",
-    "connect-mongodb": "^1.1.5",
-    "express": "^4.15.3",
-    "express-sessions": "^1.0.6",
-    "express-validator": "^3.2.0",
-    "jsonwebtoken": "^7.4.1",
-    "mongoose": "^4.10.3",
-    "qr-image": "^3.2.0"
-  },
-  "devDependencies": {
-    "morgan": "^1.8.2"
-  }
+    "name": "pure-node",
+    "version": "1.0.0",
+    "description": "studying node.js",
+    "main": "server.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "nodemon ./server/server.js --watch ./server"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/DanielPolyansky/pure-node.git"
+    },
+    "keywords": [
+        "node"
+    ],
+    "author": "Daniel Polyasnkiy",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/DanielPolyansky/pure-node/issues"
+    },
+    "homepage": "https://github.com/DanielPolyansky/pure-node#readme",
+    "dependencies": {
+        "body-parser": "^1.17.2",
+        "connect-mongodb": "^1.1.5",
+        "express": "^4.15.3",
+        "express-sessions": "^1.0.6",
+        "express-validator": "^3.2.0",
+        "jsonwebtoken": "^7.4.1",
+        "mongoose": "^4.10.3"
+    },
+    "devDependencies": {
+        "morgan": "^1.8.2"
+    }
 }
