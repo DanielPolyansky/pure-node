@@ -10,6 +10,7 @@ const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
 const morgan = require('morgan');
 const validator = require('express-validator');
+
 mongoose.Promise = global.Promise;
 
 mongoose.connect(database, (err) => {
@@ -32,3 +33,5 @@ app.use('/', router);
 app.listen(port, () => {
     console.log('server running on port ' + port);
 });
+
+module.exports = app;
