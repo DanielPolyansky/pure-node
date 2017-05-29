@@ -10,15 +10,16 @@
 </head>
 
 <body>
-    <form action="submit">
+    <form action="/api/authenticate" method="post">
         <label for="email">email</label>
         <input type="email" name="email" />
-        <label type="text" for="username">username</label>
-        <input name="username" />
-        <label type="password" for="pass">password</label>
-        <input name="pass" />
-        <label type="password" for="cofirm_pass"></label>
-        <input name="confirm_pass" />
+        <label for="username">username</label>
+        <input name="username" type="text" />
+        <label for="password">password</label>
+        <input name="password" type="password" />
+        <label for="cofirm_password">password confirmation</label>
+        <input name="confirm_password" type="password" />
+        <input type="submit" value="Register" />
     </form>
 </body>
 

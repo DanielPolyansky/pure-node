@@ -10,11 +10,12 @@
 </head>
 
 <body>
-    <form action="submit">
-        <label type="text" for="username">username</label>
-        <input name="username" />
-        <label type="password" for="pass">password</label>
-        <input name="pass" />
+    <form action="/api/login" method="post">
+        <label for="username">username</label>
+        <input name="username" type="text" />
+        <label for="password">password</label>
+        <input name="password" type="password" />
+        <input type="submit" value="Log In" />
     </form>
 </body>
 

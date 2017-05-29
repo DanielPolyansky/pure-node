@@ -7,9 +7,9 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const router = require('./api/routes');
 const mongoose = require('mongoose');
-const userShema = require('./models/userSchemas');
 const jwt = require('jsonwebtoken');
 const morgan = require('morgan');
+const validator = require('express-validator');
 
 mongoose.connect(database, (err) => {
     if (err) {
@@ -20,7 +20,9 @@ mongoose.connect(database, (err) => {
 })
 
 app.set('superSecret', secret);
+
 app.use(bodyParser.json());
+app.use(validator());
 app.use(express.static(path.join(__dirname, '../public')));
 app.use(morgan('dev'));
 app.use('/', router);
