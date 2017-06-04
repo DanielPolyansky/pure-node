@@ -5,11 +5,14 @@ const User = require('../models/userSchema');
 const secret = require('../../config').secret;
 const jwt = require('jsonwebtoken');
 router.get('/', (req, res, next) => {
-    res.sendFile(path.join(__dirname, '../../index.html'));
+    res.sendFile(path.join(__dirname, '../../client/index.html'));
 });
 
 router.get('/home', (req, res, next) => {
     res.redirect('/');
+});
+router.get('/chat', (req, res, next) => {
+    res.sendFile(path.join(__dirname, '../../client/chat.html'));
 });
 
 router.get('/auth', (req, res, next) => {
@@ -19,6 +22,7 @@ router.get('/auth', (req, res, next) => {
 router.get('/login', (req, res, next) => {
     res.sendFile(path.join(__dirname, '../../client/login.html'));
 });
+
 
 router.post('/api/login', (req, res, next) => {
 
@@ -87,29 +91,20 @@ router.post('/api/authenticate', (req, res, next) => {
             username: req.body.username,
             password: req.body.password
         });
-        newUser.save((err) => {
-            try {
-                if (err) throw err;
-                else {
-                    console.log('auth correctly');
-                    res.json({
-                        success: true,
-                        message: 'authenticated correctly'
-                    });
-                }
-            } catch (err) {
-                console.log(err.msg);
+        newUser.save((err, user) => {
+            if (err) {
                 res.json({
                     success: false,
-                    message: 'authentication failes'
+                    message: err.msg
+                });
+            } else {
+                res.json({
+                    success: true,
+                    message: 'authenticated correctly'
                 });
             }
         });
     }
-
-
-
-
 });
 
 module.exports = router;

@@ -10,7 +10,11 @@ const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
 const morgan = require('morgan');
 const validator = require('express-validator');
-const apiRoutes = require('express').Router();
+let socket = require('socket.io');
+let server = app.listen(port, () => {
+    console.log('server is running on 3000');
+});
+let io = socket(server);
 mongoose.Promise = global.Promise;
 
 mongoose.connect(database, (err) => {
@@ -27,36 +31,22 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(validator());
 
-apiRoutes.use(function(req, res, next) {
 
-    const token = req.body.token || req.query.token || req.headers['x-access-token'];
-
-    if (token) {
-
-        jwt.verify(token, app.get('superSecret'), function(err, decoded) {
-            if (err) {
-                return res.json({ success: false, message: 'Failed to authenticate token.' });
-            } else {
-                req.decoded = decoded;
-                next();
-            }
-        });
-
-    } else {
-        return res.status(403).send({
-            success: false,
-            message: 'No token provided.'
-        });
-
-    }
-});
-
-app.use(express.static(path.join(__dirname, '../public')));
+app.use(express.static(path.join(__dirname, '../client')));
 app.use(morgan('dev'));
 app.use('/', router);
-app.use('/api', apiRoutes);
-app.listen(port, () => {
-    console.log('server running on port ' + port);
-});
 
-module.exports = app;
+io.on('connection', (socket) => {
+    console.log('socket connected');
+
+    socket.on('disconnect', () => {
+        console.log('socket disconnected');
+    });
+
+    socket.on('new_msg', (data) => {
+        console.log(data);
+        io.sockets.emit('new_income_msg', {
+            message: data.message
+        })
+    });
+});

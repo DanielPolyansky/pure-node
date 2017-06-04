@@ -1,7 +1,6 @@
 const http = require('http');
 const host = '127.1.0.0';
 const port = '3000';
-const qrImage = require('qr-image');
 const fs = require('fs'); //file system , not file stream
 const path = require('path');
 const mimes = {
