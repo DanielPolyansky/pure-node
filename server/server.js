@@ -12,7 +12,7 @@ const morgan = require('morgan');
 const validator = require('express-validator');
 let socket = require('socket.io');
 let server = app.listen(port, () => {
-    console.log('server is running on 3000');
+    console.log('server is running on ' + port);
 });
 let io = socket(server);
 mongoose.Promise = global.Promise;
