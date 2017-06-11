@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const port = require('../config').port;
+//const port = require('../config').port;
 const secret = require('../config').secret;
 const database = require('../config').database;
 const path = require('path');
@@ -12,8 +12,8 @@ const morgan = require('morgan');
 const validator = require('express-validator');
 const cors = require('cors');
 let socket = require('socket.io');
-let server = app.listen(port, () => {
-    console.log('server is running on ' + port);
+let server = app.listen(process.env.PORT || 3000, () => {
+    console.log('server is running on ' + (process.env.PORT || 3000));
 });
 let io = socket(server);
 mongoose.Promise = global.Promise;
