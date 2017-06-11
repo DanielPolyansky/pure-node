@@ -10,6 +10,7 @@ const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
 const morgan = require('morgan');
 const validator = require('express-validator');
+const cors = require('cors');
 let socket = require('socket.io');
 let server = app.listen(port, () => {
     console.log('server is running on ' + port);
@@ -27,6 +28,7 @@ mongoose.connect(database, (err) => {
 
 app.set('superSecret', secret);
 
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(validator());
