@@ -12,7 +12,7 @@ const morgan = require('morgan');
 const validator = require('express-validator');
 const cors = require('cors');
 let socket = require('socket.io');
-let server = app.listen(port || 3000, () => {
+let server = app.listen(port, () => {
     console.log('server is running on ' + port);
 });
 let io = socket(server);
