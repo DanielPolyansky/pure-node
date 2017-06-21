@@ -5,12 +5,13 @@ const secret = require('../config').secret;
 const database = require('../config').database;
 const path = require('path');
 const bodyParser = require('body-parser');
-const router = require('./api/routes');
+const routes = require('./api/routes');
 const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
 const morgan = require('morgan');
 const validator = require('express-validator');
 const cors = require('cors');
+const api = require('./api/api');
 let socket = require('socket.io');
 let server = app.listen(port, () => {
     console.log('server is running on ' + port);
@@ -36,8 +37,8 @@ app.use(validator());
 
 app.use(express.static(path.join(__dirname, '../client')));
 app.use(morgan('dev'));
-app.use('/', router);
-
+app.use('/', routes);
+app.use('/api/', api);
 io.on('connection', (socket) => {
     console.log('socket connected');
 
@@ -52,3 +53,5 @@ io.on('connection', (socket) => {
         })
     });
 });
+
+exports.modules = app;
