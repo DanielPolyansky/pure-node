@@ -20,5 +20,6 @@ module.exports = mongoose.model('User', new Schema({
         required: true,
         min: [6, 'Too short'],
         max: [15, 'Too long']
-    }
+    },
+    friends: []
 }));
